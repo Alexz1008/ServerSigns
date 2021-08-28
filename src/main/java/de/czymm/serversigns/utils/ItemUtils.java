@@ -20,6 +20,8 @@ package de.czymm.serversigns.utils;
 import de.czymm.serversigns.itemdata.ItemSearchCriteria;
 import de.czymm.serversigns.itemdata.ItemStringParser;
 import de.czymm.serversigns.legacy.ItemStringConverter;
+
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -98,15 +100,21 @@ public class ItemUtils {
 
             if (!ignoreName) {
                 if (meta1.hasDisplayName() != meta2.hasDisplayName()) return false;
-                if (meta1.hasDisplayName())
-                    if (!meta1.getDisplayName().equals(meta2.getDisplayName())) return false;
+                if (meta1.hasDisplayName()) {
+                    if (!ChatColor.stripColor(meta1.getDisplayName()).equals(ChatColor.stripColor(meta2.getDisplayName()))) {
+                    	return false;
+                    }
+                }
             }
 
             if (!ignoreLores) {
                 if (meta1.hasLore() != meta2.hasLore()) return false;
                 if (meta1.hasLore()) {
-                    for (int i = 0; i < meta1.getLore().size(); i++)
-                        if (!meta1.getLore().get(i).equals(meta2.getLore().get(i))) return false;
+                    for (int i = 0; i < meta1.getLore().size(); i++) {
+                        if (!ChatColor.stripColor(meta1.getLore().get(i)).equals(ChatColor.stripColor(meta2.getLore().get(i)))) {
+                        	return false;
+                        }
+                    }
                 }
             }
 
